@@ -12,24 +12,23 @@ const Layout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
+    <div className="flex h-screen bg-gray-900 text-white overflow-hidden">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       {!isSidebarOpen && (
         <button
           onClick={toggleSidebar}
-          className="absolute top-8 left-4  text-white p-2 rounded"
+          className="absolute top-8 left-4 text-white p-2 rounded"
         >
           <BsWindowSidebar className="size-6" />
         </button>
       )}
-      <main
-        className={`bg-gray-900 transition-all duration-300 ${
-          isSidebarOpen ? "mx-32" : "mx-40"
-        } flex-1`}
-      >
+
+      <main className="flex-1 flex justify-center items-center px-4">
         <div
-          className={`mt-8 transition-all duration-600 mx-auto`}
+          className={`transition-all duration-300 ${
+            isSidebarOpen ? "max-w-5xl" : "max-w-6xl"
+          } w-full h-full flex flex-col overflow-hidden p-6 pb-2 mx-auto`}
         >
           <Header />
           <MainContent />
