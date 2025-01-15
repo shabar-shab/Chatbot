@@ -1,5 +1,5 @@
 import React from "react";
-import { FiPaperclip } from "react-icons/fi"; // Attachment Icon
+import { FiPaperclip, FiSend } from "react-icons/fi"; // Attachment and Send Icons
 import { BsCalendar2Event, BsGlobe } from "react-icons/bs"; // Calendar and Globe Icons
 import { BiMicrophone } from "react-icons/bi"; // Microphone Icon
 
@@ -18,11 +18,16 @@ const ChatInput = () => {
         <BsGlobe className="text-gray-400 hover:text-gray-200 w-5 h-5" />
       </button>
 
-      <input
-        type="text"
-        placeholder="Message My Chatbot"
-        className="flex-1 bg-gray-700 text-gray-300 placeholder-gray-500 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div className="relative flex-1">
+        <input
+          type="text"
+          placeholder="Message My Chatbot"
+          className="w-full bg-gray-700 text-gray-300 placeholder-gray-500 rounded-lg px-4 py-2 pr-10 outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
+          <FiSend className="text-gray-400 hover:text-gray-200 w-5 h-5" />
+        </button>
+      </div>
 
       <button className="ml-4">
         <BiMicrophone className="text-gray-400 hover:text-gray-200 w-6 h-6" />
