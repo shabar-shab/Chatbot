@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiPaperclip, FiSend } from "react-icons/fi"; // Attachment and Send Icons
 import { BsCalendar2Event, BsGlobe } from "react-icons/bs"; // Calendar and Globe Icons
 import { BiMicrophone } from "react-icons/bi"; // Microphone Icon
 
-const ChatInput = () => {
+const ChatInput = ({onSendMessage }) => {
+  const [input, setInput] = useState("");
+  const handleSend = () => {
+    if (input.trim() !== "") {
+      onSendMessage(input);
+      setInput(""); // Clear input after sending
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  };{}
   return (
     <div className="flex items-center bg-gray-800 text-white rounded-lg p-4 shadow-md w-full">
       <button className="mr-4">
@@ -21,10 +34,13 @@ const ChatInput = () => {
       <div className="relative flex-1">
         <input
           type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Message My Chatbot"
           className="w-full bg-gray-700 text-gray-300 placeholder-gray-500 rounded-lg px-4 py-2 pr-10 outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
+        <button onClick={handleSend} className="absolute right-3 top-1/2 transform -translate-y-1/2">
           <FiSend className="text-gray-400 hover:text-gray-200 w-5 h-5" />
         </button>
       </div>
