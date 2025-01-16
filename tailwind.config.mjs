@@ -10,8 +10,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        scrollbarThumb: "#4a5568", // Gray thumb
+        scrollbarTrack: "#2d3748", // Dark background
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 };

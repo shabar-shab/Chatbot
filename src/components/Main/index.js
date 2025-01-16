@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ChatInput from "../ChatInput";
 
 const MainContent = () => {
@@ -6,12 +6,15 @@ const MainContent = () => {
     { type: "response", text: "Hello! How can I assist you today?" },
   ]);
 
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleSendMessage = (text) => {
     if (text.trim() !== "") {
-      // Add user message
       setMessages((prev) => [...prev, { type: "user", text }]);
-
-      // Simulate a response after a delay
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
@@ -20,36 +23,24 @@ const MainContent = () => {
       }, 1000);
     }
   };
+
   return (
     <>
-      <div className="flex flex-col h-full bg-gray-800 p-6 rounded-lg shadow">
-        <h2 className="text-lg font-semibold mb-4">
+      <div className="flex flex-col h-full bg-gray-800 rounded-lg shadow overflow-hidden">
+        <h2 className="text-lg font-semibold mb-4 p-6">
           OpenAI's GPT is not entirely free...
         </h2>
 
-        <div className="flex-1 overflow-y-auto">
-          <p>
-            OpenAI provides <strong>free trial credits</strong> when you sign
-            up. These credits are valid for a limited time (e.g., 3 months).
-          </p>
-          <p className="mt-4">
-            You can build your own chatbot using GPT's APIs by leveraging these
-            free credits. However, after the trial, you'll need to pay for the
-            service.
-          </p>
-          <p className="mt-4">
-            Building your chatbot can also involve React, Tailwind CSS, and
-            other tools for a sleek and responsive UI. Try exploring these
-            frameworks!
-          </p>
-        </div>
-        <div className="flex-1 overflow-y-auto space-y-4">
+        <div
+          className="flex-1 px-6 overflow-y-auto custom-scrollbar scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
+          style={{ paddingRight: "15px" }}
+        >
           {messages.map((message, index) => (
             <div
               key={index}
               className={`flex ${
                 message.type === "user" ? "justify-end" : "justify-start"
-              }`}
+              } mb-2`}
             >
               <div
                 className={`max-w-sm px-4 py-2 rounded-lg ${
@@ -62,13 +53,15 @@ const MainContent = () => {
               </div>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
+
         <div className="p-4 border-t border-gray-700">
           <ChatInput onSendMessage={handleSendMessage} />
         </div>
       </div>
       <span className="text-center text-xs text-[10px] mt-3">
-        Built and created by Shabir Ahmad Dar{" "}
+        Built and created by Shabir Ahmad Dar
       </span>
     </>
   );

@@ -12,7 +12,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white overflow-hidden">
+    <div className="flex h-screen bg-gray-900 text-white">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       {!isSidebarOpen && (
